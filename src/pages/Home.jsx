@@ -1,25 +1,33 @@
 import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import CardInfosHome from "../components/CardInfosHome";
 
 const Home = () => {
+  const cardInfos = [
+    {
+      title: "You are our #1 priority",
+      description:
+        "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes",
+      iconUrl: require("./../img/icon-chat.png"),
+    },
+    {
+      title: "More savings means higher rates",
+      description:
+        "The more you save with us, the higher your interest rate will be!",
+      iconUrl: require("./../img/icon-money.png"),
+    },
+    {
+      title: "Security you can trust",
+      description:
+        "We use top of the line encryption to make sure your data and money is always safe.",
+      iconUrl: require("./../img/icon-security.png"),
+    },
+  ];
+
   return (
     <>
-      <p>Bonjour les gens :=)</p>
-      {/* <nav class="main-nav">
-        <a class="main-nav-logo" href="./index.html">
-          <img
-            class="main-nav-logo-image"
-            src="./img/argentBankLogo.png"
-            alt="Argent Bank Logo"
-          />
-          <h1 class="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a class="main-nav-item" href="./sign-in.html">
-            <i class="fa fa-user-circle"></i>
-            Sign In
-          </a>
-        </div>
-      </nav>
+      <Header />
       <main>
         <div class="hero">
           <section class="hero-content">
@@ -32,46 +40,18 @@ const Home = () => {
         </div>
         <section class="features">
           <h2 class="sr-only">Features</h2>
-          <div class="feature-item">
-            <img
-              src="./img/icon-chat.png"
-              alt="Chat Icon"
-              class="feature-icon"
-            />
-            <h3 class="feature-item-title">You are our #1 priority</h3>
-            <p>
-              Need to talk to a representative? You can get in touch through our
-              24/7 chat or through a phone call in less than 5 minutes.
-            </p>
-          </div>
-          <div class="feature-item">
-            <img
-              src="./img/icon-money.png"
-              alt="Chat Icon"
-              class="feature-icon"
-            />
-            <h3 class="feature-item-title">More savings means higher rates</h3>
-            <p>
-              The more you save with us, the higher your interest rate will be!
-            </p>
-          </div>
-          <div class="feature-item">
-            <img
-              src="./img/icon-security.png"
-              alt="Chat Icon"
-              class="feature-icon"
-            />
-            <h3 class="feature-item-title">Security you can trust</h3>
-            <p>
-              We use top of the line encryption to make sure your data and money
-              is always safe.
-            </p>
-          </div>
+          {cardInfos.map((el) => {
+            return (
+              <CardInfosHome
+                title={el.title}
+                description={el.description}
+                iconUrl={el.iconUrl}
+              />
+            );
+          })}
         </section>
       </main>
-      <footer class="footer">
-        <p class="footer-text">Copyright 2020 Argent Bank</p>
-      </footer> */}
+      <Footer />
     </>
   );
 };

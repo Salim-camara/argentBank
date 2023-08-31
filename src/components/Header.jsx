@@ -1,8 +1,9 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const actualRoute = useLocation().pathname;
+  const userInfos = useSelector((state) => state.UserReducer.infosUser);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -29,7 +30,11 @@ const Header = () => {
             alignItems: "center",
           }}
         >
-          {token && <p style={{ margin: 0, marginRight: 10 }}>Tony</p>}
+          {token && (
+            <p style={{ margin: 0, marginRight: 10 }}>
+              {userInfos && userInfos.firstName}
+            </p>
+          )}
           {token ? (
             <div
               class="fa fa-user-circle"

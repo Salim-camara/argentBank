@@ -4,11 +4,18 @@ import Connexion from "./pages/Connexion";
 import Dashboard from "./pages/Dashboard";
 
 const Router = () => {
-  const routes = useRoutes([
-    { path: "*", element: <Home /> },
-    { path: "/login", element: <Connexion /> },
-    { path: "/dashboard", element: <Dashboard /> },
-  ]);
+  const token = localStorage.getItem("token");
+  const routes = useRoutes(
+    !token
+      ? [
+          { path: "*", element: <Home /> },
+          { path: "/login", element: <Connexion /> },
+        ]
+      : [
+          { path: "*", element: <Dashboard /> },
+          { path: "/dashboard", element: <Dashboard /> },
+        ]
+  );
   return routes;
 };
 

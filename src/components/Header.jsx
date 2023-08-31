@@ -1,8 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const actualRoute = useLocation().pathname;
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/home");
+  };
   return (
     <>
       <nav class="main-nav">
@@ -22,19 +29,23 @@ const Header = () => {
             alignItems: "center",
           }}
         >
-          {actualRoute === "/dashboard" && (
-            <p style={{ margin: 0, marginRight: 10 }}>Tony</p>
-          )}
-          {actualRoute === "/dashboard" ? (
-            <a class="main-nav-item" href="./sign-in.html">
-              <i class="fa fa-user-circle"></i>
+          {token && <p style={{ margin: 0, marginRight: 10 }}>Tony</p>}
+          {token ? (
+            <div
+              class="fa fa-user-circle"
+              style={{ fontWeight: "bolder", cursor: "pointer" }}
+              onClick={handleSignOut}
+            >
               Sign Out
-            </a>
+            </div>
           ) : (
-            <a class="main-nav-item" href="./sign-in.html">
-              <i class="fa fa-user-circle"></i>
+            <div
+              class="fa fa-user-circle"
+              style={{ fontWeight: "bolder", cursor: "pointer" }}
+              onClick={() => navigate("/login")}
+            >
               Sign In
-            </a>
+            </div>
           )}
         </div>
       </nav>

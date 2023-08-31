@@ -1,29 +1,20 @@
 import axios from "axios";
+import { SERVER_BASE_URL } from "../utils/Variables";
 
-const testData = {
-  email: "tony@stark.com",
-  password: "password123",
-};
-
-const GetUser = () => {
+export const GET_USER = "GET_USER";
+const GetUser = ({ email, password }) => {
   return async (dispatch) => {
-    // try {
-
-    //   return result;
-    // } catch (error) {
-    //   console.log("GetUser => ", error);
-    // }
-    axios
-      .get("https://localhost:3001/")
-      .then((res) => {
-        console.log("l12 ", res);
-      })
-      .catch((err) => {
-        console.log("l19 ", err);
+    try {
+      const result = await axios.post(`${SERVER_BASE_URL}/user/login`, {
+        email,
+        password,
       });
+      dispatch({ type: GET_USER, payload: result.data });
+      return result;
+    } catch (error) {
+      console.log("GetUser => ", error);
+    }
   };
 };
 
 export default GetUser;
-
-export const GET_USER = GetUser;

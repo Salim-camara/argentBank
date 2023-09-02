@@ -31,21 +31,28 @@ const Header = () => {
           }}
         >
           {token && (
-            <p style={{ margin: 0, marginRight: 10 }}>
-              {userInfos && userInfos.firstName}
-            </p>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <i class="fa fa-user-circle"></i>
+              <p style={{ margin: 0, marginLeft: 5, marginRight: 20 }}>
+                {userInfos && userInfos.firstName}
+              </p>
+            </div>
           )}
           {token ? (
             <div
-              class="fa fa-user-circle"
-              style={{ fontWeight: "bolder", cursor: "pointer" }}
+              style={{
+                fontWeight: "bolder",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
               onClick={handleSignOut}
             >
-              Sign Out
+              <i class="fa fa-sign-out"></i>
+              <p style={{ marginLeft: 5 }}>Sign Out</p>
             </div>
           ) : (
             <div
-              class="fa fa-user-circle"
               style={{ fontWeight: "bolder", cursor: "pointer" }}
               onClick={() => navigate("/login")}
             >

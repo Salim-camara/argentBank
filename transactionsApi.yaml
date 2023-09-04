@@ -1,0 +1,171 @@
+openapi: 3.0.3
+info:
+  title: AgentBank - OpenAPI 3.0
+  description: This give you details of different endpoints of transactions API
+  termsOfService: http://argent-bank.fr/terms/
+  contact:
+    email: contact@argentbank.fr
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://localhost:3001/api/v1
+tags:
+  - name: transactions
+    description: Everything about your transactions
+paths:
+  /transactions/thisMonth/{userId}:
+    get:
+      tags:
+        - transactions
+      summary: Get current month transactions
+      description: This need to return ONLY transactions of the current month.
+      operationId: getMonthlyTrans
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '97YbTgR6g'
+          description: ID of user
+      responses:
+        '201':
+          description: Transactions sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+        '404':
+          description: transaction not found
+        '500':
+          description: server error
+  /transactions/transaction/{transactionId}:
+    get:
+      tags:
+        - transactions
+      summary: Get specific transaction with Id
+      description: This send all informations of transaction
+      operationId: transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '97YbTgR6g'
+          description: ID of transaction
+      responses:
+        '201':
+          description: transactions sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          description: transaction not found
+        '500':
+          description: server error
+          
+    put:
+      tags:
+        - transactions
+      summary: Edit infos
+      description: This allow to edit some fields
+      operationId: transactionEdit 
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '97YbTgR6g'
+          description: ID of transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryIndex: 
+                  type: integer
+                  example: 2
+                notes:
+                  type: array
+                  items: {}
+      responses:
+        '200':
+          description: transaction changed
+        '404':
+          description: transaction not found
+        '500':
+          description: server error
+    
+    delete:
+      tags:
+        - transactions
+      summary: Delete transaction
+      description: This delete transaction
+      operationId: transactionDelete
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '97YbTgR6g'
+          description: transaction of ID
+      responses:
+        '200':
+          description: transaction deleted
+        '404':
+          description: transaction not found
+        '500':
+          description: server error
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'e67bhJ95hvg5'
+        creataedAt: 
+          type: string
+          format: date
+          example: Mon Sep 04 2023 04:52:54 GMT+0200
+        modifiedAt: 
+          type: string
+          format: date
+          example: Mon Sep 04 2023 04:52:54 GMT+0200
+        transactionType:
+          type: string
+          example: Electronic
+        category:
+          type: string
+          example: '{editable by user}'
+        note:
+          type: string
+          example: '{editable by user}'
+        description:
+          type: string
+          example: Golden Sun Bakery
+        amount:
+          type: integer
+          example: 50.55
+        balance:
+          type: integer
+          example: 50.55
+        receiver:
+          type: string
+          example: '{receiverId => bank / user}'
+        sender:
+          type: string
+          example: '{senderId => bank / user}'
+    Transactions:
+      type: array
+      items:  
+        type: object
+        example: {transactionObject: true}

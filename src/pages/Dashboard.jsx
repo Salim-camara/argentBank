@@ -63,8 +63,8 @@ const Dashboard = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
               alignItems: "center",
+              height: 180,
             }}
           >
             <h1>
@@ -82,12 +82,12 @@ const Dashboard = () => {
                   <input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    style={{ margin: "0 20px 0 20px", height: 30, width: 150 }}
+                    style={{ margin: "0 5px 0 0", height: 30, width: 150 }}
                   />
                   <input
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    style={{ margin: "0 20px 0 20px", height: 30, width: 150 }}
+                    style={{ margin: "0 0 0 5px", height: 30, width: 150 }}
                   />
                 </div>
                 <div
@@ -110,7 +110,7 @@ const Dashboard = () => {
                       width: 100,
                       fontSize: 15,
                       color: "#6519cf",
-                      margin: "0 20px 0 20px",
+                      margin: "0 5px 0 0",
                       cursor: "pointer",
                     }}
                   />
@@ -125,7 +125,7 @@ const Dashboard = () => {
                       width: 100,
                       fontSize: 15,
                       color: "#6519cf",
-                      margin: "0 20px 0 20px",
+                      margin: "0 0 0 5px",
                       cursor: "pointer",
                     }}
                   />
